@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transfer Student Data — Josh Singer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Josh Singer</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">About Me</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="writing.html">Writing &amp; Speaking</a></li>
+        <li><a href="resume.html">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <a href="portfolio.html" class="back-link">← Back to Portfolio</a>
+
+      <h1 class="detail-title">Transfer Student Data</h1>
+
+      <p class="detail-intro">This project provides an example of the tension that often exists between security and ease of use. We have what sounds like a simple problem: I need to move student data from School District A's Renaissance account to School District B's account when a student transfers schools. However, things get complicated as you identify privacy risks around 1) establishing the connection between those two accounts and 2) copying over the data.</p>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>It would be nice if Admin A could send a message to Admin B, requesting data for a specified set of students, directly through the platform. Unfortunately, in addition to the fact that the platform does not currently have a messaging and notification system, even within a district account, there are privacy concerns that preclude any solution that involves presenting users with a searchable list of all of Renaissance's customers and their contact information.</p>
+      </div>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>So, alas, our users must contact their counterparts in other school districts outside of our system. That's the hard part, so the least we can do is to make the rest of the process as easy as possible once that connection is made. By providing an email template directly in the product, we facilitate the task, and reinforce the steps the requesting admin needs to take.</p>
+      </div>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>There were a number of possible workflows available to complete the data transfer upon acceptance of the request. Option A: Provide Admin B with a way to download an encrypted file, which could then be emailed to Admin A. That's more work left to the user, and it opens up a security risk. Option B: Both parties contact a customer support rep, who verifies all of the information and adds the job to a queue to be picked up and completed by a technical team. This solution does not scale, and would end up increasing the burden on customer support, which runs counter to a driving goal of this project. Option C: Steal from the streaming service model. Admin B, upon receiving the request from Admin A, identifies and selects the students who transferred, prompting the system to generate a short, unique code to send back. Admin A receives that code and enters it in their system, at which point transfer process begins automatically. This is the workflow we decided to go with.</p>
+      </div>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>Once the data transfer kicks off, there's still another problem to solve. If the transferring student has already started at the new school, then we want to make sure we don't accidentally overwrite whatever data they generated in the new site. In other words, we need to determine whether the data is for a truly new student, or if it should be merged into an existing student's record in the new system. Much of that decision making can be done algorithmically, by looking for matches on identifying information like name or ID, but there are inevitably cases in which a human has to investigate and make a decision.</p>
+        <p>We can speed up this process by making a determination for each student using the algorithm, but flagging instances in which the level of confidence is below a defined threshold. These flags focus the admin's attention efficiently to where it is needed most to reduce wasted effort.</p>
+      </div>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>Ultimately, this customer-facing solution ended up being so efficient that an adapted version was developed as an internal tool for other related data transfer operations.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© Josh Singer</span>
+      <span class="footer-sep">·</span>
+      <a href="mailto:singermail@gmail.com">singermail@gmail.com</a>
+      <span class="footer-sep">·</span>
+      <a href="https://www.linkedin.com/in/josh-singer-ux/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

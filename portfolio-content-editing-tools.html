@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Editing Tools — Josh Singer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Josh Singer</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">About Me</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="writing.html">Writing &amp; Speaking</a></li>
+        <li><a href="resume.html">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <a href="portfolio.html" class="back-link">← Back to Portfolio</a>
+
+      <h1 class="detail-title">Content Editing Tools</h1>
+
+      <p class="detail-intro">Renaissance Learning's content tooling, like its Editorial department, has been around for decades. This set of programs, all developed internally, some beloved, some hated, was built on obsolete technology and held together by duct tape. We recently took on and completed a complete redesign and rebuild, moving the entire process to the same cloud environment in which our user-facing products live. As a former editor myself, I came into the project with a built-in empathy for the user, as well as a deep understanding of the tasks and pain points. Designing for former teammates was ultimately very rewarding. I recommend it!</p>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <h2 class="detail-section-heading">The CAVE (Content Authoring and Viewing Environment)</h2>
+
+      <div class="detail-section">
+        <p>The main set of workflows to support are around content management, which live in this new tool, which the editors playfully named The CAVE. There are three high level tasks to support: 1) The ability to find and view content from our large item bank, both published and in development, using a variety of filters. 2) Management of the content development workflow from request to final editorial approval, involving a prescribed set of steps and quality checks and used by item writers, editors, graphic artists, audio engineers, and project managers. 3) WYSIWYG item authoring and metadata management.</p>
+      </div>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>The original suggestion from leadership was to divvy up support of those tasks between newly-developed internal tools for viewing and authoring content, and Jira for workflow management. By modeling out this proposed workflow, we were able to identify some of the inefficiencies and extra cognitive load a multiple-tool solution would create, and convinced leadership that an investment in an all-in-one tool was worth it.</p>
+      </div>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>The ability to author and preview content as it would appear in student-facing applications upon publication, all in the same tool in which metadata, editor notes, and version history also appear, as well as the ability to automatically advance items to the next step in the process, was a huge win.</p>
+      </div>
+
+      <h2 class="detail-section-heading">Content Standards Editor</h2>
+
+      <div class="detail-section">
+        <p>The other set of workflows to support have to do with managing learning standards, like Common Core or the various state-specific standards. This is another very complex set of processes that involves importing data from third parties, then editing, sequencing and bundling the pieces to be exported and embedded in teacher-facing products.</p>
+      </div>
+
+      <div class="placeholder-screenshot detail-screenshot">Screenshot</div>
+
+      <div class="detail-section">
+        <p>As with The CAVE, here we decided to consolidate tasks that previously were handled by multiple tools into a single application, enabling a much more cohesive, logical and efficient set of workflows. The screens tend to be dense in data and highly functional. By defining data classes, each with an associated set of functions, we built an object-oriented design framework that scales easily and supports all of the importing, grooming and exporting tasks.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© Josh Singer</span>
+      <span class="footer-sep">·</span>
+      <a href="mailto:singermail@gmail.com">singermail@gmail.com</a>
+      <span class="footer-sep">·</span>
+      <a href="https://www.linkedin.com/in/josh-singer-ux/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

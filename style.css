@@ -1,0 +1,772 @@
+/* Josh Singer Portfolio — style.css */
+
+/* === CSS VARIABLES === */
+:root {
+  --bg: #faf9f7;
+  --bg-alt: #f2ede6;
+  --white: #ffffff;
+  --text: #2c2a27;
+  --text-muted: #6e6a64;
+  --accent: #5e8a78;
+  --accent-hover: #49705f;
+  --accent-light: #e4eeea;
+  --border: #e0d8ce;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --max-w: 1080px;
+  --nav-h: 68px;
+  --t: 0.2s ease;
+}
+
+/* === RESET === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--t);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* === TYPOGRAPHY === */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+p + p {
+  margin-top: 1.2em;
+}
+
+/* === LAYOUT === */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+}
+
+main {
+  padding: clamp(3rem, 8vw, 5rem) 0;
+  min-height: calc(100vh - var(--nav-h) - 80px);
+}
+
+/* === NAVIGATION === */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  position: relative;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+  transition: color var(--t);
+}
+
+.nav-logo:hover {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: color var(--t);
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transition: transform var(--t);
+  transform-origin: left;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent);
+}
+
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+/* === HAMBURGER === */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  z-index: 10;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: transform var(--t), opacity var(--t);
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* === FOOTER === */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 1.75rem 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer a {
+  color: var(--text-muted);
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+.footer-sep {
+  color: var(--border);
+  user-select: none;
+}
+
+/* === SHARED PLACEHOLDERS === */
+.placeholder-photo,
+.placeholder-screenshot {
+  background: var(--bg-alt);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* === BACK LINK === */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  transition: color var(--t);
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* === PAGE TITLE BLOCK === */
+.page-header {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.page-header h1 {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+}
+
+/* ================================================
+   PAGE: HOME
+================================================ */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.home-headline {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  line-height: 1.15;
+  margin-bottom: 1.75rem;
+  color: var(--text);
+}
+
+.home-body {
+  font-size: 1.025rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.home-body a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent-light);
+  transition: color var(--t), border-color var(--t);
+}
+
+.home-body a:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent);
+}
+
+.home-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+
+/* ================================================
+   PAGE: PORTFOLIO
+================================================ */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.portfolio-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow var(--t), transform var(--t);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card:hover {
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.07);
+  transform: translateY(-3px);
+}
+
+.card-thumb {
+  aspect-ratio: 16/9;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.card-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  transition: gap var(--t);
+  align-self: flex-start;
+}
+
+.card-link:hover {
+  color: var(--accent-hover);
+  gap: 0.5em;
+}
+
+.card-link::after {
+  content: '→';
+}
+
+/* ================================================
+   PAGE: PORTFOLIO DETAIL
+================================================ */
+.detail-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 1.5rem;
+}
+
+.detail-intro {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 68ch;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.detail-screenshot {
+  width: 100%;
+  aspect-ratio: 16/9;
+  margin: 2.5rem 0;
+}
+
+.detail-section {
+  max-width: 68ch;
+  margin-top: 2rem;
+}
+
+.detail-section p {
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.detail-section p + p {
+  margin-top: 1.1em;
+}
+
+.detail-section-heading {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ================================================
+   PAGE: WRITING & SPEAKING
+================================================ */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.articles-list {
+  margin-bottom: 4.5rem;
+}
+
+.article-card {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-card:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.article-thumb {
+  width: 90px;
+  height: 66px;
+  background: var(--bg-alt);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.article-pub {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: 1.075rem;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.article-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 0.6rem;
+}
+
+.article-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.article-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color var(--t);
+}
+
+.article-link:hover {
+  color: var(--accent-hover);
+}
+
+.speaking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.speaking-item {
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--accent);
+}
+
+.speaking-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.speaking-title {
+  font-family: var(--font-display);
+  font-size: 1.075rem;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+}
+
+.speaking-org {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.speaking-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ================================================
+   PAGE: RESUME
+================================================ */
+.resume-layout {
+  max-width: 800px;
+}
+
+.resume-section {
+  margin-bottom: 3.5rem;
+}
+
+.resume-section-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--accent-light);
+  color: var(--text);
+}
+
+/* Experience */
+.job {
+  margin-bottom: 2.75rem;
+}
+
+.job:last-child {
+  margin-bottom: 0;
+}
+
+.job-company {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.job-role {
+  margin-bottom: 0.75rem;
+}
+
+.job-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.job-dates {
+  font-size: 0.875rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.job-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.job-prev-titles {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  font-style: italic;
+}
+
+.job-bullets {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.job-bullets li {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding-left: 1.25rem;
+  position: relative;
+  line-height: 1.65;
+}
+
+.job-bullets li::before {
+  content: '·';
+  position: absolute;
+  left: 0.15rem;
+  color: var(--accent);
+  font-size: 1.2em;
+  line-height: 1.4;
+}
+
+/* Software */
+.software-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.software-tag {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.3em 0.9em;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Education */
+.education-item {
+  margin-bottom: 0.5rem;
+}
+
+.education-degree {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.education-school {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.education-honor {
+  font-size: 0.875rem;
+  color: var(--accent);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+/* ================================================
+   RESPONSIVE
+================================================ */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0.5rem 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.75rem clamp(1.25rem, 5vw, 2.5rem);
+    width: 100%;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* Home */
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .home-photo {
+    aspect-ratio: 4/3;
+    max-width: 220px;
+    order: -1;
+  }
+
+  /* Portfolio */
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Writing */
+  .article-card {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .article-thumb {
+    width: 100%;
+    height: 100px;
+  }
+
+  /* Resume */
+  .job-title-row {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 2rem 0 3rem;
+  }
+
+  .detail-screenshot {
+    margin: 1.5rem 0;
+  }
+}
