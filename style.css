@@ -811,17 +811,19 @@ main {
     display: none;
   }
 
-  /* Home — medium: photo + headline on same row, body below */
+  /* Home — mobile: centered photo above stacked text */
   .home-hero {
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "photo headline"
-      "body  body";
-    column-gap: 1.5rem;
-    row-gap: 1.25rem;
+      "photo"
+      "headline"
+      "body";
+    gap: 1.25rem;
   }
 
   .home-photo-wrap {
+    justify-self: center;
+    width: 180px;
     aspect-ratio: 3/4;
   }
 
@@ -832,7 +834,6 @@ main {
 
   .home-headline {
     margin-bottom: 0;
-    align-self: center;
   }
 
   /* Portfolio */
@@ -861,26 +862,6 @@ main {
 @media (max-width: 480px) {
   main {
     padding: 2rem 0 3rem;
-  }
-
-  /* Home — narrow: centered photo above stacked text */
-  .home-hero {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "photo"
-      "headline"
-      "body";
-    gap: 1.25rem;
-  }
-
-  .home-photo-wrap {
-    justify-self: center;
-    width: 180px;
-    aspect-ratio: 3/4;
-  }
-
-  .home-headline {
-    margin-bottom: 0;
   }
 
   .detail-screenshot {
