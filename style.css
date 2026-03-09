@@ -67,6 +67,17 @@ p + p {
   margin-top: 1.2em;
 }
 
+ol, ul {
+  padding-left: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+li {
+  line-height: 1.75;
+  color: var(--text);
+}
+
 /* === LAYOUT === */
 .container {
   max-width: var(--max-w);
