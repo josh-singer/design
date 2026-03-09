@@ -824,6 +824,14 @@ main {
     grid-template-columns: 1fr;
   }
 
+  .detail-intro p {
+    order: 1;
+  }
+
+  .detail-intro .detail-screenshot {
+    order: 2;
+  }
+
   .nav-toggle {
     display: flex;
   }
