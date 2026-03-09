@@ -428,7 +428,7 @@ main {
   margin-bottom: 1.5rem;
 }
 
-.detail-screenshot--intro {
+.detail-screenshot.detail-screenshot--intro {
   float: right;
   width: 45%;
   margin: 0 0 1.5rem 2.5rem;
@@ -803,7 +803,7 @@ main {
    RESPONSIVE
 ================================================ */
 @media (max-width: 768px) {
-  .detail-screenshot--intro {
+  .detail-screenshot.detail-screenshot--intro {
     float: none;
     width: 100%;
     margin: 0 0 1.5rem 0;
