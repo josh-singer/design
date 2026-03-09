@@ -811,10 +811,15 @@ main {
     gap: 2rem;
   }
 
-  .home-photo {
-    aspect-ratio: 4/3;
-    max-width: 220px;
+  .home-photo-wrap {
     order: -1;
+    max-width: 220px;
+    aspect-ratio: 4/3;
+  }
+
+  .home-photo {
+    height: 100%;
+    object-fit: cover;
   }
 
   /* Portfolio */
