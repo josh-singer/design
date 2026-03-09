@@ -311,6 +311,29 @@ main {
   display: block;
 }
 
+.skills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.skill h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.skill p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* ================================================
    PAGE: PORTFOLIO
 ================================================ */
@@ -466,6 +489,10 @@ main {
 }
 
 @media (max-width: 600px) {
+  .skills {
+    grid-template-columns: 1fr;
+  }
+
   .detail-screenshots-pair {
     grid-template-columns: 1fr;
   }
