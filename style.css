@@ -442,13 +442,13 @@ main {
   line-height: 1.8;
 }
 
-.detail-intro .detail-screenshot {
+.detail-screenshot--intro {
   margin: 0;
 }
 
-.detail-intro .detail-screenshot img {
+.detail-screenshot--intro img {
   width: 100%;
-  max-height: 500px;
+  max-height: 320px;
   object-fit: contain;
   object-position: top;
 }
@@ -828,7 +828,7 @@ main {
     order: 1;
   }
 
-  .detail-intro .detail-screenshot {
+  .detail-screenshot--intro {
     order: 2;
   }
 
