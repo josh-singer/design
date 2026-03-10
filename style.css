@@ -806,13 +806,6 @@ main {
   color: var(--text-muted);
 }
 
-.education-honor {
-  font-size: 0.875rem;
-  color: var(--accent);
-  font-style: italic;
-  margin-top: 0.2rem;
-}
-
 /* ================================================
    RESPONSIVE
 ================================================ */
