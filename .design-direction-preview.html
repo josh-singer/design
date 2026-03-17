@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Direction Preview — Background & Accent Color</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #f1f5f9;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    header h1 { font-size: 1.4rem; font-weight: 700; color: #0f172a; letter-spacing: -0.02em; }
+
+    .question {
+      font-size: 1rem; color: #475569; font-style: italic; margin-top: 0.5rem;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+
+    .instruction {
+      margin-top: 1rem; font-size: 0.875rem; background: #eff6ff; color: #1d4ed8;
+      padding: 0.6rem 1.25rem; border-radius: 8px; display: inline-block; border: 1px solid #bfdbfe;
+    }
+
+    .options-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .option-card.current { grid-column: 1 / -1; }
+
+    .option-card {
+      background: white; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+      border: 2px solid #e2e8f0; display: flex; flex-direction: column;
+    }
+
+    .option-card:hover { border-color: #6366f1; box-shadow: 0 4px 20px rgba(99,102,241,0.12); }
+    .option-card.current { border-color: #94a3b8; }
+
+    .card-header { padding: 1rem 1.25rem 0.75rem; border-bottom: 1px solid #f1f5f9; }
+
+    .option-label {
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; display: block; margin-bottom: 0.25rem;
+    }
+
+    .option-card.current .option-label { color: #64748b; }
+    .option-card.option-a .option-label { color: #7c3aed; }
+    .option-card.option-b .option-label { color: #0891b2; }
+    .option-card.option-c .option-label { color: #059669; }
+    .option-card.option-d .option-label { color: #dc2626; }
+
+    .option-title { font-size: 1.05rem; font-weight: 600; color: #0f172a; }
+    .color-meta { font-size: 0.7rem; color: #94a3b8; margin-top: 0.2rem; font-family: 'SF Mono', monospace; }
+
+    .visual-preview {
+      padding: 0; flex: 1; overflow: hidden;
+    }
+
+    /* ── Shared mini-site chrome ── */
+    .mini-site { font-family: 'DM Sans', system-ui, sans-serif; font-size: 13px; }
+
+    .mini-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; height: 44px; border-bottom-width: 1px; border-bottom-style: solid;
+    }
+
+    .mini-nav-logo { font-weight: 600; font-size: 13px; }
+
+    .mini-nav-links { display: flex; gap: 1.25rem; font-size: 12px; }
+
+    .mini-nav-links a { text-decoration: none; opacity: 0.7; font-weight: 500; }
+
+    .mini-body { padding: 1.5rem; }
+
+    .mini-headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.35rem; line-height: 1.2; margin-bottom: 0.75rem;
+    }
+
+    .mini-para { font-size: 0.78rem; line-height: 1.7; margin-bottom: 1rem; opacity: 0.85; }
+
+    .mini-skills { display: flex; gap: 0.6rem; margin-bottom: 1.25rem; }
+
+    .mini-skill {
+      border-radius: 6px; padding: 0.5rem 0.65rem; flex: 1;
+    }
+
+    .mini-skill-h { font-size: 0.7rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .mini-skill-p { font-size: 0.65rem; line-height: 1.45; opacity: 0.75; }
+
+    .mini-link { font-size: 0.78rem; font-weight: 500; text-decoration: none; }
+    .mini-link::after { content: ' →'; }
+
+    .verdict { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #f1f5f9; }
+    .pros, .cons { padding: 1rem 1.25rem; }
+    .pros { border-right: 1px solid #f1f5f9; }
+    .pros h3, .cons h3 { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .pros h3 { color: #059669; }
+    .cons h3 { color: #e11d48; }
+    .verdict ul { list-style: none; padding: 0; }
+    .verdict li { font-size: 0.8rem; color: #475569; line-height: 1.5; padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
+    .pros li::before { content: "✓ "; color: #059669; font-weight: 700; position: absolute; left: 0; }
+    .cons li::before { content: "! "; color: #e11d48; font-weight: 700; position: absolute; left: 0; }
+
+    .card-footer { padding: 0.75rem 1.25rem; background: #f8fafc; border-top: 1px solid #f1f5f9; }
+    .tell-claude {
+      font-size: 0.75rem; color: #64748b; background: #f1f5f9; padding: 0.35rem 0.65rem;
+      border-radius: 6px; display: block; font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    @media (max-width: 768px) {
+      .options-grid { grid-template-columns: 1fr; }
+      .option-card.current { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Design Direction</h1>
+    <p class="question">"show me some options for background color and accent color"</p>
+    <p class="instruction">Browse the options below. Tell Claude: <strong>"I'll go with Option A"</strong> (or B, C, D) · <strong>"Keep current"</strong> · <strong>"Give me more choices"</strong></p>
+  </header>
+
+  <main class="options-grid">
+
+    <!-- CURRENT -->
+    <article class="option-card current">
+      <div class="card-header">
+        <span class="option-label">Current</span>
+        <h2 class="option-title">Warm Parchment & Sage</h2>
+        <p class="color-meta">--bg: #faf9f7 · --bg-alt: #f2ede6 · --accent: #5e8a78 · --border: #e0d8ce</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#faf9f7; color:#2c2a27;">
+          <div class="mini-nav" style="background:#faf9f7; border-color:#e0d8ce;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links" style="color:#2c2a27;">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#5e8a78; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#e4eeea;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#e4eeea;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#e4eeea;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#5e8a78;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Warm neutrals feel human and approachable — fitting for a collaborative designer</li>
+            <li>Sage green reads as calm and thoughtful without being clinical</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Warm parchment can feel dated or "portfolio-y" to some audiences</li>
+            <li>Sage green is a common palette choice in design portfolios right now</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "Keep current" · or pick an option below</code>
+      </div>
+    </article>
+
+    <!-- OPTION A: Warm Amber -->
+    <article class="option-card option-a">
+      <div class="card-header">
+        <span class="option-label">Option A</span>
+        <h2 class="option-title">Warm Amber</h2>
+        <p class="color-meta">--bg: #faf8f3 · --bg-alt: #f2e8d8 · --accent: #9b6b3a · --border: #e0ceb4</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#faf8f3; color:#2c2a27;">
+          <div class="mini-nav" style="background:#faf8f3; border-color:#e0ceb4;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#9b6b3a; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#f0e0c8;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#f0e0c8;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#f0e0c8;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#9b6b3a;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Amber-brown accent feels craftsman and grounded — suggests depth and experience</li>
+            <li>Warmer palette differentiates from the cool-toned portfolios common in tech</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Can skew too rustic — may undercut a technology-forward positioning</li>
+            <li>Lower contrast than current sage; check links pass WCAG AA</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option A"</code>
+      </div>
+    </article>
+
+    <!-- OPTION B: Slate Blue -->
+    <article class="option-card option-b">
+      <div class="card-header">
+        <span class="option-label">Option B</span>
+        <h2 class="option-title">Cool Slate</h2>
+        <p class="color-meta">--bg: #f7f8fa · --bg-alt: #edf0f5 · --accent: #4a74a8 · --border: #d0d8e8</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#f7f8fa; color:#2c2a27;">
+          <div class="mini-nav" style="background:#f7f8fa; border-color:#d0d8e8;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#4a74a8; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#dce8f5;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#dce8f5;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#dce8f5;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#4a74a8;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Cool slate reads as precise and professional — signals systematic thinking</li>
+            <li>Blue is highly legible as a link color — familiar and trusted</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Risk of feeling generic — blue portfolios are extremely common in tech/design</li>
+            <li>Cool bg may feel clinical against the warm serif display font</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option B"</code>
+      </div>
+    </article>
+
+    <!-- OPTION C: True Neutral -->
+    <article class="option-card option-c">
+      <div class="card-header">
+        <span class="option-label">Option C</span>
+        <h2 class="option-title">True Neutral</h2>
+        <p class="color-meta">--bg: #fafafa · --bg-alt: #f2f2f0 · --accent: #555555 · --border: #e2e2e0</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#fafafa; color:#2c2a27;">
+          <div class="mini-nav" style="background:#fafafa; border-color:#e2e2e0;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#555555; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#ebebeb;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#ebebeb;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#ebebeb;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#555555;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Lets the work speak — no color competes with portfolio screenshots</li>
+            <li>Timeless and minimal; won't feel dated in 2 years</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Very little personality — the serif headings need to carry the character alone</li>
+            <li>Dark gray links are harder to distinguish from body text at a glance</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option C"</code>
+      </div>
+    </article>
+
+    <!-- OPTION D: Deep Forest -->
+    <article class="option-card option-d">
+      <div class="card-header">
+        <span class="option-label">Option D</span>
+        <h2 class="option-title">Deep Forest</h2>
+        <p class="color-meta">--bg: #faf9f7 · --bg-alt: #ece4d8 · --accent: #2c6b52 · --border: #d4c8b8</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#faf9f7; color:#2c2a27;">
+          <div class="mini-nav" style="background:#faf9f7; border-color:#d4c8b8;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#2c6b52; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#b8d8cc;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#b8d8cc;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#b8d8cc;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#2c6b52;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Deeper green has stronger contrast and more visual authority than current sage</li>
+            <li>Keeps the warm-neutral bg so the overall tone stays familiar but feels upgraded</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>The richer accent-light (#b8d8cc) is more saturated — skill cards feel bolder</li>
+            <li>Still in the green family; if you want a real departure, look at A or B</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option D"</code>
+      </div>
+    </article>
+
+    <!-- OPTION E: Ink & Cream -->
+    <article class="option-card option-e">
+      <div class="card-header">
+        <span class="option-label">Option E</span>
+        <h2 class="option-title">Ink & Cream</h2>
+        <p class="color-meta">--bg: #1e2330 · --bg-alt: #252b3b · --accent: #c9a85c · --border: #2e3548</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#1e2330; color:#f0ece4;">
+          <div class="mini-nav" style="background:#1e2330; border-color:#2e3548;">
+            <span class="mini-nav-logo" style="color:#f0ece4;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#f0ece4;">About Me</a>
+              <a style="color:#c9a85c; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#f0ece4;">Writing</a>
+              <a style="color:#f0ece4;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#f0ece4;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#f0ece4;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#2e3a28; border: 1px solid #3a4a30;">
+                <div class="mini-skill-h" style="color:#f0ece4;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#a8a49e;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#2e3a28; border: 1px solid #3a4a30;">
+                <div class="mini-skill-h" style="color:#f0ece4;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#a8a49e;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#2e3a28; border: 1px solid #3a4a30;">
+                <div class="mini-skill-h" style="color:#f0ece4;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#a8a49e;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#c9a85c;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Dark mode feels distinctive — very few UX portfolios use it; immediately memorable</li>
+            <li>Gold accent on dark bg has strong contrast and feels senior/editorial</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Portfolio screenshots (mostly light-bg app UIs) may look jarring against dark surroundings</li>
+            <li>Requires careful contrast checking throughout — more maintenance work</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option E"</code>
+      </div>
+    </article>
+
+    <!-- OPTION F: Dusty Rose -->
+    <article class="option-card option-f">
+      <div class="card-header">
+        <span class="option-label">Option F</span>
+        <h2 class="option-title">Dusty Rose</h2>
+        <p class="color-meta">--bg: #faf8f7 · --bg-alt: #f5ede9 · --accent: #a05c6a · --border: #e8d8d2</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#faf8f7; color:#2c2a27;">
+          <div class="mini-nav" style="background:#faf8f7; border-color:#e8d8d2;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#a05c6a; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#f0dde2;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#f0dde2;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#f0dde2;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#a05c6a;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Warm mauve is genuinely uncommon in UX portfolios — stands out without being loud</li>
+            <li>Pairs naturally with the warm serif display font</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Some audiences may read pink/mauve as less authoritative — know your hiring context</li>
+            <li>Dusty rose skill card bg is the most distinctive element; confirm it doesn't distract</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option F"</code>
+      </div>
+    </article>
+
+    <!-- OPTION G: Portland Fog -->
+    <article class="option-card option-g">
+      <div class="card-header">
+        <span class="option-label">Option G</span>
+        <h2 class="option-title">Portland Fog</h2>
+        <p class="color-meta">--bg: #f0f0ee · --bg-alt: #e4e4e0 · --accent: #5a7a6e · --border: #d4d4d0</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#f0f0ee; color:#2c2a27;">
+          <div class="mini-nav" style="background:#f0f0ee; border-color:#d4d4d0;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#5a7a6e; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#d8e8e4;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#d8e8e4;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#d8e8e4;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#5a7a6e;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Cooler, grayer bg is more neutral than current — portfolio images pop more</li>
+            <li>Teal-green accent is a subtle refinement of current; familiar but fresher</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Gray bg can feel flat; the warmth in the current palette does a lot of quiet work</li>
+            <li>Low-contrast bg-alt — the distinction between bg and bg-alt may be too subtle</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option G"</code>
+      </div>
+    </article>
+
+    <!-- OPTION H: Plum & Paper -->
+    <article class="option-card option-h">
+      <div class="card-header">
+        <span class="option-label">Option H</span>
+        <h2 class="option-title">Plum & Paper</h2>
+        <p class="color-meta">--bg: #faf9f8 · --bg-alt: #f2ede8 · --accent: #7a5c8a · --border: #e0d4dc</p>
+      </div>
+      <div class="visual-preview">
+        <div class="mini-site" style="background:#faf9f8; color:#2c2a27;">
+          <div class="mini-nav" style="background:#faf9f8; border-color:#e0d4dc;">
+            <span class="mini-nav-logo" style="color:#2c2a27;">Josh Singer</span>
+            <div class="mini-nav-links">
+              <a style="color:#2c2a27;">About Me</a>
+              <a style="color:#7a5c8a; opacity:1; font-weight:600;">Portfolio</a>
+              <a style="color:#2c2a27;">Writing</a>
+              <a style="color:#2c2a27;">Resume</a>
+            </div>
+          </div>
+          <div class="mini-body">
+            <div class="mini-headline" style="color:#2c2a27;">Experienced, Collaborative Designer</div>
+            <p class="mini-para" style="color:#2c2a27;">I've spent 15+ years at Renaissance Learning designing products used by teachers, students, and administrators across K–12 education.</p>
+            <div class="mini-skills">
+              <div class="mini-skill" style="background:#ecddf4;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Systems Thinking</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Designing across interconnected products and organizations.</div>
+              </div>
+              <div class="mini-skill" style="background:#ecddf4;">
+                <div class="mini-skill-h" style="color:#2c2a27;">Platform Integration</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Bridging tools and data flows across EdTech ecosystems.</div>
+              </div>
+              <div class="mini-skill" style="background:#ecddf4;">
+                <div class="mini-skill-h" style="color:#2c2a27;">K–12 Assessment</div>
+                <div class="mini-skill-p" style="color:#6e6a64;">Deep expertise in assessment UX for educators.</div>
+              </div>
+            </div>
+            <a class="mini-link" style="color:#7a5c8a;">View my resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Muted plum is rare in UX portfolios and pairs beautifully with serif type</li>
+            <li>Warm paper bg preserves the approachable quality of the current design</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Lavender skill cards are the strongest visual element — confirm they don't overwhelm</li>
+            <li>Purple can read as creative/arts rather than systems-thinking; consider your audience</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "I'll go with Option H"</code>
+      </div>
+    </article>
+
+  </main>
+
+  <style>
+    .option-card.option-e .option-label { color: #ea580c; }
+    .option-card.option-f .option-label { color: #db2777; }
+    .option-card.option-g .option-label { color: #0d9488; }
+    .option-card.option-h .option-label { color: #4338ca; }
+  </style>
+</body>
+</html>

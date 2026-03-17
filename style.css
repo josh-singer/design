@@ -437,6 +437,42 @@ main {
   content: '→';
 }
 
+.portfolio-section-title {
+  grid-column: 1 / -1;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  color: var(--text);
+  margin-top: 0.5rem;
+  margin-bottom: -0.25rem;
+}
+
+.portfolio-card--featured {
+  grid-column: 1 / -1;
+  flex-direction: row;
+}
+
+.portfolio-card--featured .card-thumb {
+  width: 50%;
+  flex-shrink: 0;
+  aspect-ratio: auto;
+  border-bottom: none;
+  border-right: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .portfolio-card--featured {
+    flex-direction: column;
+  }
+
+  .portfolio-card--featured .card-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
 /* ================================================
    PAGE: PORTFOLIO DETAIL
 ================================================ */
